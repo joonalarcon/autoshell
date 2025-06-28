@@ -1,1 +1,37 @@
-venv
+# Entornos virtuales
+venv/
+.env/
+.env.*
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos temporales y logs
+*.log
+*.tmp
+*.bak
+
+# Archivos de sistema (macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Archivos de configuracion de editor/IDE comunes
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Carpeta data con contenido sensible (si la tienes con info que no quieres subir)
+# data/
+
+# Otros (si usas pytest, coverage, etc)
+.coverage
+.cache/
+.pytest_cache/
+
+# Si generas archivos de documentación o builds, ignorarlos
+docs/_build/
+build/
+dist/
