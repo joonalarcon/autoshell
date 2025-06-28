@@ -1,71 +1,100 @@
-import platform
-import subprocess
-from rich.console import Console
-from rich.table import Table
-
-console = Console()
-
-# Datos "JSON" embebidos como diccionario Python
 programs_data = {
     "cowsay": {
         "name": "Cowsay",
         "darwin": "brew install cowsay",
-        "linux": "sudo apt install cowsay -y"
+        "linux": "sudo apt install cowsay -y",
+        "description": "Genera dibujos de vacas con mensajes divertidos."
+    },
+    "figlet": {
+        "name": "Figlet",
+        "darwin": "brew install figlet",
+        "linux": "sudo apt install figlet -y",
+        "description": "Transforma texto en arte ASCII."
+    }
+}
+
+languages_data = {
+    "python3": {
+        "name": "Python 3",
+        "darwin": "brew install python",
+        "linux": "sudo apt install python3 -y",
+        "description": "Lenguaje de programación interpretado."
+    },
+    "nodejs": {
+        "name": "Node.js",
+        "darwin": "brew install node",
+        "linux": "sudo apt install nodejs -y",
+        "description": "Entorno de ejecución para JavaScript."
+    }
+}
+
+network_tools_data = {
+    "nmap": {
+        "name": "Nmap",
+        "darwin": "brew install nmap",
+        "linux": "sudo apt install nmap -y",
+        "description": "Escáner de red."
+    },
+    "net-tools": {
+        "name": "Net-Tools",
+        "darwin": "",
+        "linux": "sudo apt install net-tools -y",
+        "description": "Utilidades de red (ifconfig, netstat, etc.)."
+    }
+}
+
+personalizacion_data = {
+    "neofetch": {
+        "name": "Neofetch",
+        "darwin": "brew install neofetch",
+        "linux": "sudo apt install neofetch -y",
+        "description": "Muestra información del sistema de forma estética."
+    },
+    "htop": {
+        "name": "htop",
+        "darwin": "brew install htop",
+        "linux": "sudo apt install htop -y",
+        "description": "Monitor interactivo de procesos."
+    },
+    "bat": {
+        "name": "bat",
+        "darwin": "brew install bat",
+        "linux": "sudo apt install bat -y",
+        "description": "Visualizador de archivos mejorado."
     },
     "zsh": {
         "name": "Zsh",
         "darwin": "brew install zsh",
-        "linux": "sudo apt install zsh -y"
+        "linux": "sudo apt install zsh -y",
+        "description": "Shell potente y personalizable."
     },
-    {
-        "name": "Neofetch",
-        "darwin": "brew install neofetch",
-        "linux": "sudo apt install neofetch -y"
+    "powerlevel10k": {
+        "name": "Powerlevel10k",
+        "darwin": "brew install romkatv/powerlevel10k/powerlevel10k",
+        "linux": "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k && echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc",
+        "description": "Tema visual para Zsh altamente personalizable."
     }
 }
 
-def list_programs():
-    table = Table(title="Programas disponibles", expand=False, border_style="cyan")
-    table.add_column("Opción", style="bold yellow", justify="center")
-    table.add_column("Programa", style="bold green")
-
-    keys = list(programs_data.keys())
-    for idx, key in enumerate(keys, 1):
-        table.add_row(str(idx), programs_data[key]["name"])
-    table.add_row(str(len(keys)+1), "Salir")
-    console.print(table)
-    return keys
-
-def install_program(key):
-    sistema = platform.system()
-    data = programs_data.get(key)
-
-    if not data:
-        console.print(f"[bold red]Programa '{key}' no encontrado.[/bold red]")
-        return
-
-    if sistema == "Darwin":
-        comando = data.get("darwin")
-    elif sistema == "Linux":
-        comando = data.get("linux")
-    else:
-        console.print("[bold red]Sistema no compatible automáticamente.[/bold red]")
-        return
-
-    if not comando:
-        console.print(f"[bold red]No hay comando para instalar {data['name']} en {sistema}.[/bold red]")
-        return
-
-    table = Table(title=f"Instalador {data['name']}", expand=False, border_style="cyan")
-    table.add_column("Opción", style="bold yellow", justify="center")
-    table.add_column("Comando", style="bold green")
-    table.add_row("1", comando)
-    console.print(table)
-
-    console.print("[bold green]¿Desea ejecutar la instalación ahora? (s/n):[/bold green]")
-    choice = input("> ").strip().lower()
-    if choice == "s":
-        console.print("[bold cyan]Ejecutando instalación...[/bold cyan]")
-        subprocess.run(comando, shell=True)
-    else:
-        console.print("[bold red]Instalación cancelada.[/bold red]")
+features_data = {
+    "install_programs": {
+        "name": "Programas útiles",
+        "function": "menu_instalar_programas",
+        "data": programs_data
+    },
+    "install_languages": {
+        "name": "Lenguajes de programación",
+        "function": "menu_instalar_programas",
+        "data": languages_data
+    },
+    "install_network_tools": {
+        "name": "Herramientas de red",
+        "function": "menu_instalar_programas",
+        "data": network_tools_data
+    },
+    "install_customization": {
+        "name": "Personalización del sistema",
+        "function": "menu_instalar_programas",
+        "data": personalizacion_data
+    }
+}
