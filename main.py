@@ -2,7 +2,6 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.prompt import Prompt
-from rich.style import Style
 
 from installers.programs import features_data
 import platform
@@ -32,6 +31,7 @@ def detectar_distro_linux():
 
 def instalar_paquete(comando):
     try:
+        console.print(f"[bold blue]🔧 Ejecutando comando:[/] {comando}")
         subprocess.run(comando, shell=True, check=True)
         console.print(f"[bold green]✅ Instalado correctamente:[/] [bold]{comando}[/bold]")
     except subprocess.CalledProcessError:
@@ -57,7 +57,6 @@ def menu_instalar_programas(data):
     keys = list(data.keys())
     for i, key in enumerate(keys, start=1):
         entry = data[key]
-
         soportes_list = []
         distros = entry.get("distros", [])
 
@@ -78,8 +77,7 @@ def menu_instalar_programas(data):
             f"[bold cyan]{i}[/bold cyan]",
             f"[bold yellow]{entry['name']}[/bold yellow]",
             entry["description"],
-            soportes_str,
-            end_section=True  # Esto agrega línea horizontal después de cada fila
+            soportes_str
         )
 
     console.print(table)
@@ -87,12 +85,14 @@ def menu_instalar_programas(data):
 
     if opcion.isdigit() and 0 < int(opcion) <= len(keys):
         key = keys[int(opcion) - 1]
+        entry = data[key]
         comando = None
+
         if sistema == "linux":
-            distro = detectar_distro_linux()
-            comando = data[key]["linux"].get(distro)
+            linux_data = entry.get("linux", {})
+            comando = linux_data.get(distro)
         else:
-            comando = data[key].get(sistema)
+            comando = entry.get("darwin")
 
         if comando:
             instalar_paquete(comando)
