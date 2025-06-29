@@ -73,6 +73,7 @@ def menu_instalar_programas(data, feature_key):
         table.add_column("Nombre", style="bold yellow", no_wrap=True)
         table.add_column("Descripción", style="bold white")
         table.add_column("Compatibilidad", style="bold green", no_wrap=True)
+        table.add_column("Link", style="bold blue", no_wrap=True)
 
         sistemas_mostrar = [
             ("debian", "🌀 Debian"),
@@ -86,26 +87,46 @@ def menu_instalar_programas(data, feature_key):
             entry = data[key]
             soportes_list = []
 
-            if sistema == "darwin":
-                color = "green" if entry.get("darwin") else "red"
-                marca = "✅" if entry.get("darwin") else "❌"
-                soportes_list.append(f"[bold][{color}]{marca} macOS[/{color}][/bold]")
+            # macOS
+            darwin_cmd = entry.get("darwin")
+            if darwin_cmd and darwin_cmd.strip().lower() != "no disponible":
+                color = "green"
+                marca = "✅"
+            else:
+                color = "red"
+                marca = "❌"
+            soportes_list.append(f"[bold][{color}]{marca} 🍎 macOS[/{color}][/bold]")
 
-            if sistema == "linux":
-                linux_commands = entry.get("linux")
-                if isinstance(linux_commands, dict):
-                    for so_key, so_icon in sistemas_mostrar[:-1]:
-                        color = "green" if so_key in linux_commands else "red"
-                        marca = "✅" if so_key in linux_commands else "❌"
-                        soportes_list.append(f"[bold][{color}]{marca} {so_icon}[/{color}][/bold]")
-                elif isinstance(linux_commands, str):
+            # Linux distros
+            linux_commands = entry.get("linux")
+            if isinstance(linux_commands, dict):
+                for so_key, so_icon in sistemas_mostrar[:-1]:
+                    cmd = linux_commands.get(so_key)
+                    if cmd and cmd.strip().lower() != "no disponible":
+                        color = "green"
+                        marca = "✅"
+                    else:
+                        color = "red"
+                        marca = "❌"
+                    soportes_list.append(f"[bold][{color}]{marca} {so_icon}[/{color}][/bold]")
+            elif isinstance(linux_commands, str):
+                if linux_commands.strip().lower() != "no disponible":
                     soportes_list.append("[bold green]✅ Linux Genérico[/bold green]")
                 else:
-                    soportes_list.append("[bold red]❌ Linux[/bold red]")
+                    soportes_list.append("[bold red]❌ Linux Genérico[/bold red]")
+            else:
+                soportes_list.append("[bold red]❌ Linux[/bold red]")
 
             soportes_str = " | ".join(soportes_list)
 
-            table.add_row(str(i), entry["name"], entry["description"], soportes_str)
+            # Aquí mostramos el link si existe
+            url = entry.get("url")
+            if url:
+                link_display = f"[link={url}]link[/link]"
+            else:
+                link_display = "-"
+
+            table.add_row(str(i), entry["name"], entry["description"], soportes_str, link_display)
 
         console.print(table)
         opcion = Prompt.ask("\n[bold green]Ingresa el número del programa a instalar (o '0' para volver)[/bold green]", default="0")
@@ -128,13 +149,12 @@ def menu_instalar_programas(data, feature_key):
             else:
                 comando = entry.get("darwin")
 
-            if not comando:
+            if not comando or comando.strip().lower() == "no disponible":
                 console.print("[bold yellow]⚠ Este programa no tiene soporte para tu sistema operativo o distro.[/bold yellow]")
                 time.sleep(3)
                 continue
 
             instalar_paquete(comando)
-
         else:
             console.print("[bold red]❌ Opción inválida.[/bold red]")
             time.sleep(2)

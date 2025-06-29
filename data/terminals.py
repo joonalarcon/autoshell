@@ -1,82 +1,93 @@
-# data/terminals.py
 install_terminals = {
     "kitty": {
         "name": "Kitty",
-        "darwin": "brew install kitty",
+        "darwin": "no disponible",
         "linux": {
-            "ubuntu": "sudo apt install kitty -y",
+            "ubuntu": "no disponible",
             "debian": "sudo apt install kitty -y",
-            "arch": "sudo pacman -S kitty --noconfirm",
-            "fedora": "sudo dnf install kitty -y"
+            "arch": "no disponible",
+            "fedora": "no disponible"
         },
         "description": "Terminal GPU rápida, moderna y con muchas características.",
-        "distros": ["debian", "arch", "fedora"]
+        "distros": ["debian"],
+        "url": "https://sw.kovidgoyal.net/kitty/"
     },
     "warp": {
         "name": "Warp",
-        "darwin": "brew install --cask warp",
-        "linux": "", # Considera agregar instrucciones para Linux si existen alternativas
+        "darwin": "no disponible",
+        "linux": {
+            "ubuntu": "no disponible",
+            "debian": "no disponible",
+            "arch": "no disponible",
+            "fedora": "no disponible"
+        },
         "description": "Terminal moderna con interfaz gráfica y AI integrada.",
-        "distros": []
+        "distros": [],
+        "url": "https://www.warp.dev/"
     },
     "alacritty": {
         "name": "Alacritty",
-        "darwin": "brew install alacritty",
+        "darwin": "no disponible",
         "linux": {
-            "ubuntu": "sudo apt install alacritty -y",
+            "ubuntu": "no disponible",
             "debian": "sudo apt install alacritty -y",
-            "arch": "sudo pacman -S alacritty --noconfirm",
-            "fedora": "sudo dnf install alacritty -y"
+            "arch": "no disponible",
+            "fedora": "no disponible"
         },
         "description": "Terminal GPU acelerada y minimalista.",
-        "distros": ["debian", "arch", "fedora"]
+        "distros": ["debian"],
+        "url": "https://github.com/alacritty/alacritty"
     },
     "tilix": {
         "name": "Tilix",
-        "darwin": "", # No hay un comando simple de instalación para macOS
+        "darwin": "no disponible",
         "linux": {
-            "ubuntu": "sudo apt install tilix -y",
+            "ubuntu": "no disponible",
             "debian": "sudo apt install tilix -y",
-            "arch": "sudo pacman -S tilix --noconfirm",
-            "fedora": "sudo dnf install tilix -y"
+            "arch": "no disponible",
+            "fedora": "no disponible"
         },
         "description": "Terminal en mosaico con interfaz GTK+3.",
-        "distros": [ "debian", "arch", "fedora"]
+        "distros": ["debian"],
+        "url": "https://gnunn1.github.io/tilix-web/"
     },
     "wezterm": {
         "name": "WezTerm",
-        "darwin": "brew install --cask wezterm",
+        "darwin": "no disponible",
         "linux": {
-            "ubuntu": "sudo snap install wezterm --classic",
+            "ubuntu": "no disponible",
             "debian": "sudo snap install wezterm --classic",
-            "arch": "yay -S wezterm-git",  # Sujeto a AUR
-            "fedora": "sudo dnf install wezterm -y"
+            "arch": "no disponible",
+            "fedora": "no disponible"
         },
         "description": "Terminal moderna, rápida y multiplataforma.",
-        "distros": [ "debian", "arch", "fedora"]
+        "distros": ["debian"],
+        "url": "https://wezfurlong.org/wezterm/"
     },
     "gnome-terminal": {
         "name": "GNOME Terminal",
-        "darwin": "", # No se instala comúnmente en macOS
+        "darwin": "no disponible",
         "linux": {
-            "ubuntu": "sudo apt install gnome-terminal -y",
+            "ubuntu": "no disponible",
             "debian": "sudo apt install gnome-terminal -y",
-            "arch": "sudo pacman -S gnome-terminal --noconfirm",
-            "fedora": "sudo dnf install gnome-terminal -y"
+            "arch": "no disponible",
+            "fedora": "no disponible"
         },
         "description": "Terminal clásica del entorno GNOME.",
-        "distros": ["debian", "arch", "fedora"]
+        "distros": ["debian"],
+        "url": "https://help.gnome.org/users/gnome-terminal/stable/"
     },
     "konsole": {
         "name": "Konsole",
-        "darwin": "", # No se instala comúnmente en macOS
+        "darwin": "no disponible",
         "linux": {
-            "ubuntu": "sudo apt install konsole -y",
+            "ubuntu": "no disponible",
             "debian": "sudo apt install konsole -y",
-            "arch": "sudo pacman -S konsole --noconfirm",
-            "fedora": "sudo dnf install konsole -y"
+            "arch": "no disponible",
+            "fedora": "no disponible"
         },
         "description": "Terminal del entorno KDE Plasma.",
-        "distros": ["ubuntu", "debian", "arch", "fedora"]
+        "distros": ["debian"],
+        "url": "https://konsole.kde.org/"
     }
 }

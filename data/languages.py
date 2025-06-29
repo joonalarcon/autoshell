@@ -21,7 +21,7 @@ install_programs = {
             "arch": "sudo pacman -S nodejs npm --noconfirm",
             "fedora": "sudo dnf install nodejs npm -y"
         },
-        "description": "Entorno JavaScript del lado del servidor para web moderna.",
+        "description": "Entorno JavaScript del lado del servidor.",
         "distros": ["ubuntu", "debian", "arch", "fedora"]
     },
     "java": {
